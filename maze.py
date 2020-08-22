@@ -52,6 +52,9 @@ def get_directions(G, square, triangle):
     sq_node = int(square[0]) + 6*(int(square[1]) - 1)
     tri_node = int(triangle[0]) + 6*(int(triangle[1]) - 1)
 
+    if sq_node == tri_node:
+        return [], []
+
     shortest_path = nx.shortest_path(G, sq_node, tri_node)
     pos = nx.get_node_attributes(G, 'pos')
     shortest_path_coord = [pos[node] for node in shortest_path]
@@ -68,9 +71,6 @@ def get_directions(G, square, triangle):
             directions.append('UP') # negative numbers
         elif next_node[1] < current_node[1]:
             directions.append('DOWN')
-        else:
-            directions = 'Already at the destination. No directions needed.'
-            return shortest_path, directions
 
     # compress directions
     compressed_dir = []
