@@ -70,7 +70,7 @@ def get_directions(G, square, triangle):
             directions.append('DOWN')
         else:
             directions = 'Already at the destination. No directions needed.'
-            break
+            return shortest_path, directions
 
     # compress directions
     compressed_dir = []
