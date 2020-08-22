@@ -72,7 +72,34 @@ def get_directions(G, square, triangle):
             directions = 'Already at the destination. No directions needed.'
             break
 
-    return shortest_path, directions
+    # compress directions
+    compressed_dir = []
+    count = 1
+    idx = 0
+    prev = None
+    while idx < len(directions):
+        if prev is None:
+            prev = directions[idx]
+            idx += 1
+            continue
+        if prev == directions[idx]:
+            count += 1
+            if idx == len(directions) - 1:
+                # handle last entry
+                compressed_dir.append('{} {}'.format(count, directions[idx]))
+                break
+            idx += 1
+        else:
+            compressed_dir.append('{} {}'.format(count, prev))
+            if idx == len(directions) - 1:
+                # handle last entry
+                compressed_dir.append('{} {}'.format(1, directions[idx]))
+                break
+            prev = directions[idx]
+            count = 1
+            idx += 1
+
+    return shortest_path, compressed_dir
 
 
 if __name__ == '__main__':
@@ -92,9 +119,13 @@ if __name__ == '__main__':
         G_soln.add_nodes_from(G.nodes)
 
         soln_edges = [(sp[idx], sp[idx+1]) for idx in range(len(sp)-1)]
-        G_soln.add_edges_from(soln_edges)
+        non_soln_edges = []
+        for edge in G.edges:
+            if edge not in soln_edges and edge[::-1] not in soln_edges:
+                non_soln_edges.append(edge)
 
         pos = nx.get_node_attributes(G, 'pos')
         nx.draw_networkx_nodes(G_soln, pos)
-        nx.draw_networkx_edges(G_soln, pos, edge_color='r')
+        nx.draw_networkx_edges(G_soln, pos, edgelist=non_soln_edges, arrows=False)
+        nx.draw_networkx_edges(G_soln, pos, edgelist=soln_edges, edge_color='r')
 
