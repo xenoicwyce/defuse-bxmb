@@ -1,6 +1,5 @@
 import networkx as nx
 import json
-import copy
 
 
 DRAW_SOLUTION = True

@@ -22,5 +22,3 @@ for idx in range(5):
         break
 
     initial_guess = copy.copy(temp)
-
-input('Press ENTER to continue...')
