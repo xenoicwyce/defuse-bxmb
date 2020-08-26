@@ -12,7 +12,7 @@ possible_ans = ['about', 'after', 'again', 'below', 'could',
 if __name__ == '__main__':
     initial_guess = copy.copy(possible_ans)
     for idx in range(5):
-        given = input('Enter all possible character {}: '.format(idx+1))
+        given = input('Enter all possible character {}: '.format(idx+1)).lower()
         temp = list(filter(lambda word: word[idx] in given, initial_guess))
         print(temp)
 

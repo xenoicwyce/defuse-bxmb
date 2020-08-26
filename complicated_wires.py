@@ -21,7 +21,7 @@ if __name__ == '__main__':
     print('\tl: LED')
 
     while True:
-        wire_features = input('Enter features of wire: ')
+        wire_features = input('Enter features of wire: ').lower()
 
         # exit command
         if wire_features == 'exit':
