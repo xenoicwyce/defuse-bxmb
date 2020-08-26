@@ -19,7 +19,7 @@ black = {
 
 if __name__ == '__main__':
     print('Enter the wire color and the alphabet it connects to, in each ' \
-          'panel, e.g. "ra, bb, kc".')
+          'panel, e.g. "ra, bb, kc". Enter "exit" to quit the program.')
     print('\tr: red wire')
     print('\tb: blue wire')
     print('\tk: black wire')
@@ -29,6 +29,10 @@ if __name__ == '__main__':
     while panel_num < 5:
         wires = input('Panel {}: '.format(panel_num)).lower()
         wires = [w.strip() for w in wires.split(',')]
+
+        # exit command
+        if wires == 'exit':
+            break
 
         ## input clarity check
         # check length
