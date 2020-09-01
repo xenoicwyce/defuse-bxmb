@@ -28,11 +28,11 @@ if __name__ == '__main__':
     panel_num = 1
     while panel_num < 5:
         wires = input('Panel {}: '.format(panel_num)).lower()
-        wires = [w.strip() for w in wires.split(',')]
-
         # exit command
         if wires == 'exit':
             break
+
+        wires = [w.strip() for w in wires.split(',')]
 
         ## input clarity check
         # check length
